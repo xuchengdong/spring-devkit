@@ -1,26 +1,18 @@
-spring:
-  datasource:
-    url: jdbc:mysql://192.168.131.27:3306/userdist?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull
-    username: root
-    password: uc2017
-
----
+logging:
+  file: /var/log/df-web/web-app.log
+  level:
+    root: info
 
 spring:
-  profiles: development
   datasource:
           druid:
-            url: jdbc:mysql://localhost:3306/df?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
-            username: root
-            password: 12345
-#            type: com.alibaba.druid.pool.DruidDataSource
             initialSize: 1
             minIdle: 1
             maxActive: 20
             maxWait: 60000
             timeBetweenEvictionRunsMillis: 60000
             minEvictableIdleTimeMillis: 300000
-            validationQuery: "SELECT 'x'"
+            validationQuery: SELECT 'x'
             testWhileIdle: true
             testOnBorrow: false
             testOnReturn: false
@@ -35,11 +27,24 @@ mybatis:
         map-underscore-to-camel-case: true
         default-fetch-size: 100
         default-statement-timeout: 30
----
 
+server:
+    port: 9080
+
+---
+spring:
+  profiles: development
+  datasource:
+          druid:
+            url: jdbc:mysql://localhost:3306/df?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+            username: root
+            password: 12345
+
+---
 spring:
   profiles: production
   datasource:
-        url: jdbc:mysql://192.168.131.27:3306/userdist?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull
-        username: root
-        password: uc2017
+          druid:
+            url: jdbc:mysql://192.168.81.49:3306/df?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+            username: root
+            password: 12345
