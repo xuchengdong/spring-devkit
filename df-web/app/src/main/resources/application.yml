@@ -1,7 +1,8 @@
 logging:
+  config: classpath:logback.xml
   file: /var/log/df-web/web-app.log
-  level:
-    root: info
+#  level:
+#    root: info
 
 spring:
   datasource:
