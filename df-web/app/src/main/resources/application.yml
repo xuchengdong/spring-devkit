@@ -3,3 +3,43 @@ spring:
     url: jdbc:mysql://192.168.131.27:3306/userdist?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull
     username: root
     password: uc2017
+
+---
+
+spring:
+  profiles: development
+  datasource:
+          druid:
+            url: jdbc:mysql://localhost:3306/df?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+            username: root
+            password: 12345
+#            type: com.alibaba.druid.pool.DruidDataSource
+            initialSize: 1
+            minIdle: 1
+            maxActive: 20
+            maxWait: 60000
+            timeBetweenEvictionRunsMillis: 60000
+            minEvictableIdleTimeMillis: 300000
+            validationQuery: "SELECT 'x'"
+            testWhileIdle: true
+            testOnBorrow: false
+            testOnReturn: false
+            poolPreparedStatements: false
+            maxPoolPreparedStatementPerConnectionSize: 20
+            filters: stat
+
+mybatis:
+    type-aliases-package: com.df.domain
+#    type-handlers-package: com.example.typehandler
+    configuration:
+        map-underscore-to-camel-case: true
+        default-fetch-size: 100
+        default-statement-timeout: 30
+---
+
+spring:
+  profiles: production
+  datasource:
+        url: jdbc:mysql://192.168.131.27:3306/userdist?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull
+        username: root
+        password: uc2017
