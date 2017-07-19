@@ -17,7 +17,7 @@ import javax.annotation.Resource;
 public class UserController {
 
     @Resource
-    UserService userService;
+    private UserService userService;
 
     @RequestMapping("/findUserById")
     public User findUserById(@RequestParam(value = "id", defaultValue = "1") Long id) {
