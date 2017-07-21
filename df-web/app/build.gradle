@@ -22,6 +22,9 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven{
+        url 'http://nexus.qbao.com/repository/maven-snapshots/'
+    }
 }
 
 configurations {
@@ -33,7 +36,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
     compile("org.springframework.boot:spring-boot-starter-thymeleaf")
     compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.3.0')
-    compile('com.alibaba:druid-spring-boot-starter:1.1.1')
+//    compile('com.alibaba:druid-spring-boot-starter:1.1.1')
+    compile('com.df:multipleds-spring-boot-starter:1.0-SNAPSHOT')
     runtime('mysql:mysql-connector-java')
 
     compile("org.springframework.boot:spring-boot-starter-log4j2")

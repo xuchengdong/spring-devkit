@@ -6,23 +6,23 @@ logging:
 #  level:
 #    root: info
 
-spring:
-  datasource:
-            type: com.alibaba.druid.pool.DruidDataSource
-            druid:
-              initialSize: 1
-              minIdle: 1
-              maxActive: 20
-              maxWait: 60000
-              timeBetweenEvictionRunsMillis: 60000
-              minEvictableIdleTimeMillis: 300000
-              validationQuery: SELECT 'x'
-              testWhileIdle: true
-              testOnBorrow: false
-              testOnReturn: false
-              poolPreparedStatements: false
-              maxPoolPreparedStatementPerConnectionSize: 20
-              filters: stat
+#spring:
+#  datasource:
+#            type: com.alibaba.druid.pool.DruidDataSource
+#            druid:
+#              initialSize: 1
+#              minIdle: 1
+#              maxActive: 20
+#              maxWait: 60000
+#              timeBetweenEvictionRunsMillis: 60000
+#              minEvictableIdleTimeMillis: 300000
+#              validationQuery: SELECT 'x'
+#              testWhileIdle: true
+#              testOnBorrow: false
+#              testOnReturn: false
+#              poolPreparedStatements: false
+#              maxPoolPreparedStatementPerConnectionSize: 20
+#              filters: stat
 
 mybatis:
     type-aliases-package: com.df.domain
@@ -39,25 +39,39 @@ server:
 spring:
   profiles: development
   datasource:
-          druid:
-            master:
+          multiple:
+            initialSize: 1
+            minIdle: 1
+            maxActive: 20
+            maxWait: 60000
+            timeBetweenEvictionRunsMillis: 60000
+            minEvictableIdleTimeMillis: 300000
+            validationQuery: SELECT 'x'
+            testWhileIdle: true
+            testOnBorrow: false
+            testOnReturn: false
+            poolPreparedStatements: false
+            maxPoolPreparedStatementPerConnectionSize: 20
+            filters: stat
+            enabled: true
+            defaultDataSourcesName: default
+            multipleDataSourcesNames: user01,user02,user03
+            default:
                 url: jdbc:mysql://localhost:3306/df?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
                 username: root
                 password: 12345
-            slave:
-                names: user01,user02,user03
-                user01:
-                  url: jdbc:mysql://localhost:3306/df_user01?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
-                  username: root
-                  password: 12345
-                user02:
-                  url: jdbc:mysql://localhost:3306/df_user02?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
-                  username: root
-                  password: 12345
-                user03:
-                  url: jdbc:mysql://localhost:3306/df_user03?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
-                  username: root
-                  password: 12345
+            user01:
+              url: jdbc:mysql://localhost:3306/df_user01?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+              username: root
+              password: 12345
+            user02:
+              url: jdbc:mysql://localhost:3306/df_user02?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+              username: root
+              password: 12345
+            user03:
+              url: jdbc:mysql://localhost:3306/df_user03?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+              username: root
+              password: 12345
 
 ---
 spring:

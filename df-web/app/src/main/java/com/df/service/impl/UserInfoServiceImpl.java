@@ -2,7 +2,7 @@ package com.df.service.impl;
 
 import com.df.dao.UserInfoMapper;
 import com.df.domain.UserInfo;
-import com.df.envconfig.datasource.TargetDataSource;
+import com.df.multipleds.spring.boot.autoconfigure.TargetDataSource;
 import com.df.service.UserInfoService;
 import org.springframework.stereotype.Service;
 

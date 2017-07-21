@@ -1,4 +1,4 @@
-package com.df.envconfig.datasource;
+package com.df.multipleds.spring.boot.autoconfigure;
 
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
@@ -9,19 +9,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-/**
- * 切换数据源Advice
- *
- * @author 单红宇(365384722)
- * @myblog http://blog.csdn.net/catoop/
- * @create 2016年1月23日
- */
 @Aspect
 @Order(-1)// 保证该AOP在@Transactional之前执行
 @Component
-public class DynamicDataSourceAspect {
+public class MultipleDataSourceAspect {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(DynamicDataSourceAspect.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MultipleDataSourceAspect.class);
 
     private static final int SLAVE = 3;
 
@@ -60,17 +53,17 @@ public class DynamicDataSourceAspect {
                 dsId += (dbIndex != null ? dbIndex : "");
             }
         }
-        if (!DynamicDataSourceContextHolder.containsDataSource(dsId)) {
+        if (!MultipleDataSourceContextHolder.containsDataSource(dsId)) {
             LOGGER.error("数据源[{}]不存在，使用默认数据源 > {}", dsId, point.getSignature());
         } else {
             LOGGER.debug("Use DataSource : {} > {}", dsId, point.getSignature());
-            DynamicDataSourceContextHolder.setDataSourceType(dsId);
+            MultipleDataSourceContextHolder.setDataSourceType(dsId);
         }
     }
 
     private void clearDataSourceType(JoinPoint point, TargetDataSource ds) {
         LOGGER.debug("Revert DataSource : {} > {}", ds.name(), point.getSignature());
-        DynamicDataSourceContextHolder.clearDataSourceType();
+        MultipleDataSourceContextHolder.clearDataSourceType();
     }
 
 }

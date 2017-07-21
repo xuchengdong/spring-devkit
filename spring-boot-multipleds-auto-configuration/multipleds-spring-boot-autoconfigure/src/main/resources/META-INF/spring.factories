@@ -1,2 +1,1 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.df.multipleds.spring.boot.autoconfigure.MultipleDataSourceAutoConfigure
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.df.multipleds.spring.boot.autoconfigure.MultipleDataSourceAutoConfigure
