@@ -22,12 +22,8 @@ public class MyMultipleDataSourceAspect extends MultipleDataSourceAspect {
     @Resource
     private MultipleDataSourceProperties multipleDataSourceProperties;
 
-//    private static final int SLAVE = 3;
-//
-//    private static final String MASTER = "df";
-
     @Override
-    protected void setDataSourceType(JoinPoint point, TargetDataSource ds) {
+    public void setDataSourceType(JoinPoint point, TargetDataSource ds) {
         int lastIndex = point.getArgs().length - 1;
         Object dbIndex = lastIndex >= 0 ? point.getArgs()[lastIndex] : "";
 
