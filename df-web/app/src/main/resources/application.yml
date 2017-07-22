@@ -40,6 +40,7 @@ spring:
   profiles: development
   datasource:
           multiple:
+            type: com.alibaba.druid.pool.DruidDataSource
             initialSize: 1
             minIdle: 1
             maxActive: 20

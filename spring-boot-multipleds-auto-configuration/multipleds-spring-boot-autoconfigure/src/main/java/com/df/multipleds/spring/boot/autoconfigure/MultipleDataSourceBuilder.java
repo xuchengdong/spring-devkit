@@ -59,7 +59,7 @@ public class MultipleDataSourceBuilder {
         dataBinder.setIgnoreNestedProperties(false);
         dataBinder.setIgnoreInvalidFields(false);
         dataBinder.setIgnoreUnknownFields(true);
-        dataBinder.bind(new MutablePropertyValues(properties.getMultipleDataSourcesPropertyResolver().getSubProperties(".")));
+        dataBinder.bind(new MutablePropertyValues(properties.getMultipleDataSourcesPropertyResolver().getSubProperties("")));
         return dataSource;
     }
 }

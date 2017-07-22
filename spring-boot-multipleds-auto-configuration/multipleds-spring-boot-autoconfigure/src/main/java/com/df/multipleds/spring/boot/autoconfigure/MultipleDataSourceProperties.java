@@ -34,12 +34,14 @@ public class MultipleDataSourceProperties {
 
     public MultipleDataSourceProperties init(Environment env) {
         multipleDataSourcesPropertyResolver = new RelaxedPropertyResolver(env, MULTIPLEDATASOURCE_PREFIX + ".");
-        defaultDataSourcesProperty.putAll(multipleDataSourcesPropertyResolver.getSubProperties(defaultDataSourcesName + "."));
+
         String[] names = multipleDataSourcesNames.split(",");
         for (String multipleDataSourcesName : names) {
             multipleDataSourcesPropertys.put(multipleDataSourcesName, new HashMap<>(multipleDataSourcesPropertyResolver.getSubProperties(multipleDataSourcesName + ".")));
         }
-        if (defaultDataSourcesProperty != null) {
+
+        if (defaultDataSourcesName != null) {
+            defaultDataSourcesProperty.putAll(multipleDataSourcesPropertyResolver.getSubProperties(defaultDataSourcesName + "."));
             multipleDataSourcesPropertys.put(defaultDataSourcesName, defaultDataSourcesProperty);
         } else {
             this.setDefaultDataSourcesName(names[0]);
