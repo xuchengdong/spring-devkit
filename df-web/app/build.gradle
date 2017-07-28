@@ -54,7 +54,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-log4j2")
     compile('org.springframework.boot:spring-boot-starter-aop')
 
-    optional("org.springframework.boot:spring-boot-devtools")
+    compile("org.springframework.boot:spring-boot-devtools")
 
 //    optional("org.springframework.boot:spring-boot-configuration-processor")
     testCompile group: 'junit', name: 'junit', version: '4.12'

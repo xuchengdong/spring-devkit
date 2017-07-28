@@ -35,6 +35,20 @@ mybatis:
 server:
     port: 9080
 
+#指定触发器文件没看到效果
+#spring:
+#  devtools:
+#    restart:
+#      trigger-file: "C:/Users/Administrator/.reloadtrigger"
+
+#指定外部banner没看到效果
+#banner:
+#  image:
+#    location: 'D:/image/banner-20160215.jpg'
+
+#spring:
+#    main:
+#        banner-mode: "off"
 ---
 spring:
   profiles: development
