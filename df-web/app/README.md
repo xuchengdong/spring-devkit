@@ -5,3 +5,17 @@
 java -jar app\build\libs\app-1.0-SNAPSHOT.jar --spring.profiles.active=development
 java -jar app\build\libs\app-1.0-SNAPSHOT.jar --spring.profiles.active=production
 ```
+## Properties 属性优先级
+[boot-features-external-config](http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-external-config)
+[Application property files](http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-external-config-application-property-files)
+```cmd
+command-line-argument > System-Variable > environment-variable > Application property files(application.yml)
+
+java -Dname=System-Variable  -jar app\build\libs\app-1.0-SNAPSHOT.jar --spring.profiles.active=development --name=command-line-argument
+
+java -Dname=System-Variable  -jar app\build\libs\app-1.0-SNAPSHOT.jar --spring.profiles.active=development
+
+set name=environment-variable java -jar app\build\libs\app-1.0-SNAPSHOT.jar --spring.profiles.active=development
+
+java -jar app\build\libs\app-1.0-SNAPSHOT.jar --spring.profiles.active=development
+```

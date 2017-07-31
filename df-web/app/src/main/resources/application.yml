@@ -1,8 +1,9 @@
 logging:
 #  config: classpath:logback.xml
   config: classpath:log4j2.xml
-#  path: /var/log/spring-devkit/ 指定path不起作用 需要直接指定file完整路径
-  file: /var/log/df-web/web-app.log
+# logging.file 和 logging.path 不能同时使用 http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-logging-file-output
+  path: /var/log/df-web/
+#  file: /var/log/df-web/web-app.log
 #  level:
 #    root: info
 
@@ -49,6 +50,14 @@ server:
 #spring:
 #    main:
 #        banner-mode: "off"
+
+#作用不明
+#spring:
+#  application:
+#    admin:
+#      enabled: true
+
+name: Spring
 ---
 spring:
   profiles: development
