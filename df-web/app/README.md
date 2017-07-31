@@ -19,3 +19,13 @@ set name=environment-variable java -jar app\build\libs\app-1.0-SNAPSHOT.jar --sp
 
 java -jar app\build\libs\app-1.0-SNAPSHOT.jar --spring.profiles.active=development
 ```
+
+### [Logging properties](http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-logging-file-output)
+
+logging.file | logging.path | Description 
+---|---|---
+(none)                      |(none)             |./spring.log
+/var/log/df-web/web-app.log | (none)            | /var/log/df-web/web-app.log
+(none)                      | /var/log/df-web/  | /var/log/df-web/spring.log
+web-app.log                 | /var/log/df-web/  |./spring.log
+

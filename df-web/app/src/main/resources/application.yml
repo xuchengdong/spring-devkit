@@ -1,9 +1,11 @@
 logging:
-#  config: classpath:logback.xml
-  config: classpath:log4j2.xml
+#  config: classpath:logback-spring.xml
+  config: classpath:log4j2-spring.xml
 # logging.file 和 logging.path 不能同时使用 http://docs.spring.io/spring-boot/docs/1.5.4.RELEASE/reference/htmlsingle/#boot-features-logging-file-output
-  path: /var/log/df-web/
-#  file: /var/log/df-web/web-app.log
+#  path: /var/log/df-web/
+#  file: web-app.log
+  file: /var/log/df-web/web-app.log
+#  path: /var/log/df-web/web-app.log
 #  level:
 #    root: info
 
