@@ -15,9 +15,9 @@ import javax.annotation.Resource;
  * @author xuchengdong@qbao.com on 2017/7/22.
  */
 @Component
-public class MyMultipleDataSourceAspect extends MultipleDataSourceAspect {
+public class DfMultipleDataSourceAspect extends MultipleDataSourceAspect {
 
-    private static final Logger logger = LoggerFactory.getLogger(MyMultipleDataSourceAspect.class);
+    private static final Logger logger = LoggerFactory.getLogger(DfMultipleDataSourceAspect.class);
 
     @Resource
     private MultipleDataSourceProperties multipleDataSourceProperties;
