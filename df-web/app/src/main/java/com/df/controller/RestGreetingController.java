@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.concurrent.atomic.AtomicLong;
 
 @RestController
+@RequestMapping("/test")
 public class RestGreetingController {
 
     private static final String template = "Hello, %s!";

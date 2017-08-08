@@ -20,12 +20,12 @@ public class UserController {
     private UserService userService;
 
     @RequestMapping("/findUserById")
-    public User findUserById(@RequestParam(value = "id", defaultValue = "1") Long id) {
-        return userService.findUserById(id);
+    public User findUserById(@RequestParam(value = "userId") Long userId) {
+        return userService.findUserById(userId);
     }
 
-    @RequestMapping("/{id}")
-    public User restFindUserById(@PathVariable(name = "id") Long id) {
-        return userService.findUserById(id);
+    @RequestMapping("/{userId}")
+    public User findUserById4PathVar(@PathVariable(name = "userId") Long userId) {
+        return userService.findUserById(userId);
     }
 }

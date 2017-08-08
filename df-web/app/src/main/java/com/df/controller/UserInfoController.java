@@ -12,13 +12,13 @@ import javax.annotation.Resource;
  * @author xuchengdong@qbao.com on 2017/7/19.
  */
 @RestController
-@RequestMapping("/userInfo")
+@RequestMapping("/user")
 public class UserInfoController {
 
     @Resource
     private UserInfoService userInfoService;
 
-    @RequestMapping("/{userId}")
+    @RequestMapping("/userInfo/{userId}")
     public UserInfo findUserInfoByUserId(@PathVariable(name = "userId") Long userId) {
         return userInfoService.findUserInfoByUserId(userId);
     }
