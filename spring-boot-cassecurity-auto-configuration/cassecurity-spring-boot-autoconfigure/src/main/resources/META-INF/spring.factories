@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  com.df.cassecurity.spring.boot.autoconfigure.CasSecurityAutoConfigure
