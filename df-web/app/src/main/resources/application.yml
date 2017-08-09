@@ -6,8 +6,20 @@ logging:
 #  file: web-app.log
   file: /var/log/df-web/web-app.log
 #  path: /var/log/df-web/web-app.log
-#  level:
+  level:
 #    root: info
+#  org.springframework.security: DEBUG
+    org.springframework.boot.autoconfigure.security: INFO
+
+
+security:
+#  user:
+#    password: 123456
+  cas:
+    service: http://localhost:9080/login/cas
+    casServerUrlPrefix: http://passport.qbao.com/cas
+    loginUrl: http://passport.qbao.com/cas/qianbaoLogin
+    authenticateAllArtifacts: false
 
 #spring:
 #  datasource:

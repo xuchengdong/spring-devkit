@@ -3,7 +3,12 @@ buildscript {
         springBootVersion = '1.5.4.RELEASE'
     }
     repositories {
+        // NOTE: You should declare only repositories that you need here
+        mavenLocal()
         mavenCentral()
+        maven { url "http://repo.spring.io/release" }
+        maven { url "http://repo.spring.io/milestone" }
+        maven { url "http://repo.spring.io/snapshot" }
         maven { url 'http://repo.spring.io/plugins-release' }
     }
     dependencies {
@@ -30,16 +35,18 @@ apply plugin: 'org.springframework.boot'
 sourceCompatibility = 1.8
 
 repositories {
+    // NOTE: You should declare only repositories that you need here
     mavenLocal()
     mavenCentral()
-//    maven{
-//        url 'http://nexus.qbao.com/repository/maven-snapshots/'
-//    }
+    maven { url "http://repo.spring.io/release" }
+    maven { url "http://repo.spring.io/milestone" }
+    maven { url "http://repo.spring.io/snapshot" }
+    maven { url 'http://nexus.qbao.com/repository/maven-snapshots/' }
 }
 
 configurations {
-    all*.exclude group:'org.springframework.boot',
-            module:'spring-boot-starter-logging'
+    all*.exclude group: 'org.springframework.boot',
+            module: 'spring-boot-starter-logging'
 }
 
 dependencies {
@@ -53,6 +60,11 @@ dependencies {
 
     compile("org.springframework.boot:spring-boot-starter-log4j2")
     compile('org.springframework.boot:spring-boot-starter-aop')
+//    compile('org.springframework.boot:spring-boot-starter-cache')
+    compile('org.springframework.boot:spring-boot-starter-security')
+    compile('com.df:cassecurity-spring-boot-starter:1.0-SNAPSHOT')
+//    compile('org.springframework.security:spring-security-cas')
+//    compile('org.jasig.cas.client:cas-client-core:3.4.1')
 
     compile("org.springframework.boot:spring-boot-devtools")
 
