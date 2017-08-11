@@ -16,7 +16,7 @@ security:
 #  user:
 #    password: 123456
   cas:
-    service: http://localhost:9080/login/cas
+    service: http://df.qbao.com/login/cas
     casServerUrlPrefix: http://passport.qbao.com/cas
     loginUrl: http://passport.qbao.com/cas/qianbaoLogin
     authenticateAllArtifacts: false
@@ -48,7 +48,7 @@ mybatis:
         default-statement-timeout: 30
 
 server:
-    port: 9080
+    port: 80
 
 #指定触发器文件没看到效果
 #spring:

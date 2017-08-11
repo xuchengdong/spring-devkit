@@ -15,7 +15,13 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * @author xuchengdong@qbao.com on 2017/8/7.
@@ -35,14 +41,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/test/**").permitAll()
+                .antMatchers("/test/**", "/logoutSuccess/**").permitAll()
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated().and()
-                .formLogin();
+                .logout()
+                .logoutUrl("/logout").permitAll()
+                .logoutSuccessUrl("/logoutSuccess")
+//                .logoutSuccessHandler(new SimpleUrlLogoutSuccessHandler())
+                .invalidateHttpSession(true)
+                .addLogoutHandler(new SecurityContextLogoutHandler() {
+                    @Override
+                    public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
+                        super.logout(request, response, authentication);
+                        Cookie[] cookies = request.getCookies();
+                        for (Cookie c : cookies) {
+                            c.setValue(null);
+                            c.setDomain("qbao.com");
+                            c.setPath("/");
+                            c.setMaxAge(0);
+                            response.addCookie(c);
+                        }
+                    }
+                })
+                .deleteCookies()
+                .and();
 
         ApplicationContext context = http.getSharedObject(ApplicationContext.class);
-
         AuthenticationEntryPoint casAuthenticationEntryPoint = context.getBean(AuthenticationEntryPoint.class);
         CasAuthenticationFilter casAuthenticationFilter = context.getBean(CasAuthenticationFilter.class);
 
