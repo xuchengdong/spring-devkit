@@ -6,9 +6,9 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.cas.ServiceProperties;
 import org.springframework.security.cas.authentication.CasAuthenticationProvider;
+import org.springframework.security.cas.web.CasAuthenticationEntryPoint;
 import org.springframework.security.cas.web.CasAuthenticationFilter;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,7 +16,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 
 import javax.servlet.http.Cookie;
@@ -33,9 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         super.configure(auth);
-        ApplicationContext context = getApplicationContext();
-        AuthenticationProvider authenticationProvider = context.getBean(AuthenticationProvider.class);
-        auth.authenticationProvider(authenticationProvider);
+        auth.authenticationProvider(getApplicationContext().getBean(CasAuthenticationProvider.class));
     }
 
     @Override
@@ -69,7 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and();
 
         ApplicationContext context = http.getSharedObject(ApplicationContext.class);
-        AuthenticationEntryPoint casAuthenticationEntryPoint = context.getBean(AuthenticationEntryPoint.class);
+        CasAuthenticationEntryPoint casAuthenticationEntryPoint = context.getBean(CasAuthenticationEntryPoint.class);
         CasAuthenticationFilter casAuthenticationFilter = context.getBean(CasAuthenticationFilter.class);
 
         http.exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint).and().addFilterAt(casAuthenticationFilter, CasAuthenticationFilter.class);
@@ -86,13 +83,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     @ConditionalOnMissingBean
-    public AuthenticationProvider casAuthenticationProvider(ServiceProperties serviceProperties, Cas20ServiceTicketValidator ticketValidator, CasUserDetailsService userDetailsService) {
-        CasAuthenticationProvider authenticationProvider = new CasAuthenticationProvider();
-        authenticationProvider.setServiceProperties(serviceProperties);
-        authenticationProvider.setTicketValidator(ticketValidator);
-        authenticationProvider.setUserDetailsService(userDetailsService);
-        authenticationProvider.setKey("password");
-        return authenticationProvider;
+    public CasAuthenticationProvider casAuthenticationProvider(ServiceProperties serviceProperties, Cas20ServiceTicketValidator ticketValidator, CasUserDetailsService userDetailsService) {
+        CasAuthenticationProvider casAuthenticationProvider = new CasAuthenticationProvider();
+        casAuthenticationProvider.setServiceProperties(serviceProperties);
+        casAuthenticationProvider.setTicketValidator(ticketValidator);
+        casAuthenticationProvider.setUserDetailsService(userDetailsService);
+        casAuthenticationProvider.setKey("password");
+        return casAuthenticationProvider;
     }
 
 }

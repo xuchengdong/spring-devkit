@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.cas.ServiceProperties;
 import org.springframework.security.cas.authentication.CasAuthenticationProvider;
 import org.springframework.security.cas.web.CasAuthenticationEntryPoint;
-import org.springframework.security.web.AuthenticationEntryPoint;
 
 /**
  * @author xuchengdong@qbao.com on 2017/8/8.
@@ -30,7 +29,7 @@ public class CasSecurityAutoConfigure {
 
     @Bean
     @ConditionalOnMissingBean
-    public AuthenticationEntryPoint casAuthenticationEntryPoint(CasSecurityServiceProperties casSecurityServiceProperties, ServiceProperties serviceProperties) {
+    public CasAuthenticationEntryPoint casAuthenticationEntryPoint(CasSecurityServiceProperties casSecurityServiceProperties, ServiceProperties serviceProperties) {
         CasAuthenticationEntryPoint authenticationEntryPoint = new CasAuthenticationEntryPoint();
         authenticationEntryPoint.setServiceProperties(serviceProperties);
         authenticationEntryPoint.setLoginUrl(casSecurityServiceProperties.getLoginUrl());
