@@ -10,6 +10,7 @@ logging:
 #    root: info
 #  org.springframework.security: DEBUG
     org.springframework.boot.autoconfigure.security: INFO
+    com.df.dao: debug
 
 
 security:
