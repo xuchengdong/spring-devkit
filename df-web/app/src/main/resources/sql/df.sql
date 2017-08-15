@@ -45,11 +45,15 @@ CREATE TABLE df.`t_user` (
   `user_id` int(11) NOT NULL COMMENT '用户唯一标识id',
   `user_name` varchar(30) NOT NULL COMMENT '用户名',
   `password` char(32) DEFAULT NULL COMMENT '密码',
+  `mobile` varchar(11) DEFAULT NULL COMMENT '手机号',
+  `email` varchar(20) DEFAULT NULL COMMENT '邮箱',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `t_user_user_id_uindex` (`user_id`),
-  KEY `t_user_create_time_index` (`create_time`),
-  KEY `t_user_user_name_index` (`user_name`)
+  UNIQUE KEY `t_user_user_name_index` (`user_name`),
+  UNIQUE KEY `t_user_mobile_uindex` (`mobile`),
+  UNIQUE KEY `t_user_email_uindex` (`email`),
+  KEY `t_user_create_time_index` (`create_time`)
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 COMMENT='用户路由表';
 
 CREATE TABLE df.`t_role` (
@@ -161,4 +165,4 @@ INSERT INTO df_user02.t_user_role (user_id, role_id) VALUES (1000000004, 2);
 -- dml
 -- SELECT * FROM df_user01.t_user_info WHERE id=?;
 
-SELECT a.*,b.role_name FROM df_user01.t_user_role a, df.t_role b WHERE a.role_id = b.id;
+# SELECT a.*,b.role_name FROM df_user01.t_user_role a, df.t_role b WHERE a.role_id = b.id;

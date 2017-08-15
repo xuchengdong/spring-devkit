@@ -10,6 +10,8 @@ public class User {
     private Long userId;
     private String username;
     private String password;
+    private String mobile;
+    private String email;
     private Date createTime;
 
     public Long getId() {
@@ -42,6 +44,22 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getCreateTime() {
