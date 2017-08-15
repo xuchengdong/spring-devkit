@@ -10,6 +10,9 @@ import org.apache.ibatis.annotations.Select;
  */
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM t_user_router WHERE id = #{id}")
+    @Select("SELECT * FROM t_user WHERE id = #{id}")
     User findUserById(@Param("id") Long id);
+
+    @Select("SELECT user_id FROM t_user WHERE user_name = #{userName}")
+    Long findUserIdByUserName(String userName);
 }
