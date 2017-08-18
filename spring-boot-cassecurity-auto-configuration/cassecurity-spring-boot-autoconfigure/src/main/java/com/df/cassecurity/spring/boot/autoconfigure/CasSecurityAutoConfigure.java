@@ -20,6 +20,12 @@ public class CasSecurityAutoConfigure {
 
     @Bean
     @ConditionalOnMissingBean
+    public CasSecurityServiceProperties casSecurityServiceProperties() {
+        return new CasSecurityServiceProperties();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
     public ServiceProperties serviceProperties(CasSecurityServiceProperties casSecurityServiceProperties) {
         ServiceProperties serviceProperties = new ServiceProperties();
         serviceProperties.setService(casSecurityServiceProperties.getService());
