@@ -121,6 +121,11 @@ spring:
       master: socialcp
       nodes: 192.168.131.13:26379,192.168.131.13:26380,192.168.131.13:26381
 
+  cache:
+# 限定可用的缓存
+    cache-names: user,role
+# 某些场景下禁用缓存
+#    type: none
 ---
 spring:
   profiles: production
