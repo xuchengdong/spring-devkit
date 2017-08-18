@@ -16,7 +16,9 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.session.SessionRegistryImpl;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
+import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -37,19 +39,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        ApplicationContext context = http.getSharedObject(ApplicationContext.class);
+//        SessionRegistryImpl sessionRegistry = context.getBean(SessionRegistryImpl.class);
+        ConcurrentSessionControlAuthenticationStrategy concurrentSessionControlAuthenticationStrategy = context.getBean(ConcurrentSessionControlAuthenticationStrategy.class);
+
         http
-                .csrf().disable()
+                .csrf()
+                .disable()
+
                 .authorizeRequests()
-                .antMatchers("/test/**", "/logoutSuccess/**").permitAll()
-//                .antMatchers("/user/**").hasRole("USER")
-//                .anyRequest().authenticated()
+                .antMatchers("/", "/test/**", "/logout", "/login").permitAll()
+                .antMatchers("/user/**").hasRole("USER")
+                .anyRequest().authenticated()
                 .and()
 
                 .logout()
-                .logoutUrl("/logout").permitAll()
                 .logoutSuccessUrl("/logoutSuccess")
-//                .logoutSuccessHandler(new SimpleUrlLogoutSuccessHandler())
-                .invalidateHttpSession(true)
+                .permitAll()
                 .addLogoutHandler(new SecurityContextLogoutHandler() {
                     @Override
                     public void logout(HttpServletRequest request, HttpServletResponse response, Authentication authentication) {
@@ -64,28 +70,65 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         }
                     }
                 })
-                .deleteCookies()
-                .and();
+//                    .deleteCookies("JSESSIONID", "CASTGC") // CAS 系统只clear本应用的session是不能退出整个cas的
+                .and()
 
-        ApplicationContext context = http.getSharedObject(ApplicationContext.class);
+                .sessionManagement()
+                .sessionAuthenticationStrategy(concurrentSessionControlAuthenticationStrategy)
+//                    .invalidSessionUrl("/invalidSession.html")
+                .maximumSessions(1)
+                .maxSessionsPreventsLogin(true)
+        ;
+
+/*        DelegatingApplicationListener delegating = context.getBean(DelegatingApplicationListener.class);
+        SmartApplicationListener smartListener = new GenericApplicationListenerAdapter(sessionRegistry);
+        delegating.addListener(smartListener);*/
+
         CasAuthenticationEntryPoint casAuthenticationEntryPoint = context.getBean(CasAuthenticationEntryPoint.class);
         CasAuthenticationFilter casAuthenticationFilter = context.getBean(CasAuthenticationFilter.class);
+//        ConcurrentSessionFilter concurrentSessionFilter = context.getBean(ConcurrentSessionFilter.class);
 
-        http.exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint).and().addFilterAt(casAuthenticationFilter, CasAuthenticationFilter.class);
+        http.exceptionHandling().authenticationEntryPoint(casAuthenticationEntryPoint).and()
+//                .addFilterBefore(concurrentSessionFilter, HeaderWriterFilter.class)
+                .addFilterAt(casAuthenticationFilter, CasAuthenticationFilter.class);
+    }
+
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ConcurrentSessionControlAuthenticationStrategy concurrentSessionControlAuthenticationStrategy(SessionRegistryImpl sessionRegistry) {
+        return new ConcurrentSessionControlAuthenticationStrategy(sessionRegistry);
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public CasAuthenticationFilter casAuthenticationFilter(ServiceProperties serviceProperties, AuthenticationManager authenticationManager) {
+    public SessionRegistryImpl sessionRegistryImpl() {
+        return new SessionRegistryImpl();
+    }
+
+/*    @Bean
+    @ConditionalOnMissingBean
+    public ConcurrentSessionFilter concurrentSessionFilter(SessionRegistryImpl sessionRegistry) {
+        return new ConcurrentSessionFilter(sessionRegistry, "/session-expired.htm");
+    }*/
+
+    @Bean
+    @ConditionalOnMissingBean
+    public CasAuthenticationFilter casAuthenticationFilter(ServiceProperties serviceProperties,
+                                                           AuthenticationManager authenticationManager,
+                                                           ConcurrentSessionControlAuthenticationStrategy strategy) {
         CasAuthenticationFilter casAuthenticationFilter = new CasAuthenticationFilter();
         casAuthenticationFilter.setServiceProperties(serviceProperties);
         casAuthenticationFilter.setAuthenticationManager(authenticationManager);
+        casAuthenticationFilter.setSessionAuthenticationStrategy(strategy);
         return casAuthenticationFilter;
     }
 
     @Bean
     @ConditionalOnMissingBean
-    public CasAuthenticationProvider casAuthenticationProvider(ServiceProperties serviceProperties, Cas20ServiceTicketValidator ticketValidator, CasUserDetailsService userDetailsService) {
+    public CasAuthenticationProvider casAuthenticationProvider(ServiceProperties serviceProperties,
+                                                               Cas20ServiceTicketValidator ticketValidator,
+                                                               CasUserDetailsService userDetailsService) {
         CasAuthenticationProvider casAuthenticationProvider = new CasAuthenticationProvider();
         casAuthenticationProvider.setServiceProperties(serviceProperties);
         casAuthenticationProvider.setTicketValidator(ticketValidator);

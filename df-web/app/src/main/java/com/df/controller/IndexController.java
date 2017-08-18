@@ -4,14 +4,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
- * @author xuchengdong@qbao.com on 2017/8/11.
+ * @author xuchengdong@qbao.com on 2017/8/16.
  */
 @Controller
-public class LogoutController {
+public class IndexController {
 
-    @RequestMapping("/logoutSuccess")
-    public String logout() {
-        return "logout";
+    @RequestMapping("/")
+    public String index() {
+        return "index";
     }
 
 }
