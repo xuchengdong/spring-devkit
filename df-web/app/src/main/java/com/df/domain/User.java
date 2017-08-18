@@ -1,11 +1,13 @@
 package com.df.domain;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author xuchengdong@qbao.com on 2017/7/14.
  */
-public class User {
+public class User implements Serializable{
+    private static final long serialVersionUID = -577310284950221743L;
     private Long id;
     private Long userId;
     private String username;

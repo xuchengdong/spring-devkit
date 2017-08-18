@@ -1,9 +1,12 @@
 package com.df.domain;
 
+import java.io.Serializable;
+
 /**
  * @author xuchengdong@qbao.com on 2017/8/15.
  */
-public class Role {
+public class Role implements Serializable{
+    private static final long serialVersionUID = -154589437839393511L;
     private Long id;
     private String roleName;
 

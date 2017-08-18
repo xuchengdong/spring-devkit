@@ -4,6 +4,7 @@ import com.df.dao.UserMapper;
 import com.df.domain.User;
 import com.df.multipleds.spring.boot.autoconfigure.TargetDataSource;
 import com.df.service.UserService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,6 +19,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     UserMapper userMapper;
 
+    @Cacheable("user")
     @Override
     public User findUserById(Long id) {
         return userMapper.findUserById(id);

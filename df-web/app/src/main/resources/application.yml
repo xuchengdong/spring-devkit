@@ -114,6 +114,13 @@ spring:
               username: root
               password: 12345
 
+  redis:
+    pool:
+      max-wait: 1000
+    sentinel:
+      master: socialcp
+      nodes: 192.168.131.13:26379,192.168.131.13:26380,192.168.131.13:26381
+
 ---
 spring:
   profiles: production

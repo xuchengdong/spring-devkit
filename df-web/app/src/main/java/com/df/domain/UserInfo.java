@@ -1,6 +1,9 @@
 package com.df.domain;
 
-public class UserInfo {
+import java.io.Serializable;
+
+public class UserInfo implements Serializable{
+    private static final long serialVersionUID = -8241118738525486606L;
     private Long id;
     private Long userId;
     private String mobile;
