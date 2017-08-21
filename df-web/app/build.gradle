@@ -72,6 +72,8 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-activemq')
     compile('org.apache.activemq:activemq-pool')
 
+    compile('org.springframework.boot:spring-boot-starter-amqp')
+
     compile("org.springframework.boot:spring-boot-devtools")
 
 //    optional("org.springframework.boot:spring-boot-configuration-processor")

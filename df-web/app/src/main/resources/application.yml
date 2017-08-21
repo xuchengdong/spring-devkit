@@ -134,6 +134,13 @@ spring:
     pool:
       enabled: true
       max-connections: 50
+
+  rabbitmq:
+    host: 192.168.131.221
+    port: 5672
+    username: xucd
+    password: xucd
+
 ---
 spring:
   profiles: production
