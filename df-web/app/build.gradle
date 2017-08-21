@@ -69,6 +69,9 @@ dependencies {
 //    compile('org.springframework.security:spring-security-cas')
 //    compile('org.jasig.cas.client:cas-client-core:3.4.1')
 
+    compile('org.springframework.boot:spring-boot-starter-activemq')
+    compile('org.apache.activemq:activemq-pool')
+
     compile("org.springframework.boot:spring-boot-devtools")
 
 //    optional("org.springframework.boot:spring-boot-configuration-processor")

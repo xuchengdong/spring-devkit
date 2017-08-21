@@ -126,6 +126,14 @@ spring:
     cache-names: user,role
 # 某些场景下禁用缓存
 #    type: none
+
+  activemq:
+    broker-url: tcp://192.168.131.221:61616
+#    user: admin
+#    password: secret
+    pool:
+      enabled: true
+      max-connections: 50
 ---
 spring:
   profiles: production
