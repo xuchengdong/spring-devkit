@@ -2,9 +2,11 @@ package com.df.controller;
 
 import com.df.component.mq.JmsProducers;
 import com.df.component.mq.RabbitMQProducer;
+import com.df.domain.UserInfo;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
@@ -31,5 +33,11 @@ public class TestController {
     public String sendRabbit(@PathVariable(name = "msg") String msg) {
         rabbitMQProducer.sendMessage(msg);
         return "ok";
+    }
+
+    @RequestMapping("/getUser/{userId}")
+    public UserInfo getUser(@PathVariable(name = "userId") Long userId) {
+        RestTemplate restTemplate = new RestTemplate();
+        return restTemplate.getForObject("http://df.qbao.com/user/userInfo/" + userId, UserInfo.class);
     }
 }
