@@ -1,17 +1,18 @@
 package com.df.component.mq;
 
-import org.springframework.amqp.rabbit.annotation.RabbitListener;
+import org.springframework.jms.annotation.JmsListener;
 import org.springframework.stereotype.Component;
 
 /**
- * @author xuchengdong@qbao.com on 2017/8/21.
+ * @author xuchengdong@qbao.com on 2017/8/18.
  */
 @Component
-public class RabbitMQConsumer {
+public class JmsReceiver {
 
-    @RabbitListener(queues = "spring-boot")
+    @JmsListener(destination = "someQueue")
     public void processMessage(String content) {
         // ...
         System.out.println(content);
     }
+
 }

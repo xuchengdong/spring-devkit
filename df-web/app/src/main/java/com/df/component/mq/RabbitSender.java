@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
  * @author xuchengdong@qbao.com on 2017/8/21.
  */
 @Configuration
-public class RabbitMQProducer {
+public class RabbitSender {
 
     private final static String queueName = "spring-boot";
     private final static String exchangeName = "spring-boot-exchange";
@@ -20,7 +20,7 @@ public class RabbitMQProducer {
 
     private RabbitTemplate rabbitTemplate;
 
-    public RabbitMQProducer(RabbitTemplate rabbitTemplate) {
+    public RabbitSender(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
     }
 

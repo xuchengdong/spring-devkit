@@ -13,12 +13,12 @@ import javax.jms.Session;
  * @author xuchengdong@qbao.com on 2017/8/18.
  */
 @Component
-public class JmsProducers {
+public class JmsSender {
 
     private final JmsTemplate jmsTemplate;
 
     @Autowired
-    public JmsProducers(JmsTemplate jmsTemplate) {
+    public JmsSender(JmsTemplate jmsTemplate) {
         this.jmsTemplate = jmsTemplate;
     }
 
