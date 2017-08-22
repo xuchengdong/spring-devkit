@@ -1,5 +1,7 @@
 package com.df.component.mq;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
 
@@ -9,9 +11,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class RabbitReceiver {
 
+    private static final Logger logger = LoggerFactory.getLogger(RabbitReceiver.class);
+
     @RabbitListener(queues = "spring-boot")
     public void processMessage(String content) {
         // ...
-        System.out.println(content);
+        logger.info("[{}] Receiving message: {}", "spring-boot", content);
     }
 }
