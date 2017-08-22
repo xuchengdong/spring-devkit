@@ -1,5 +1,6 @@
 package com.df.controller;
 
+import com.df.component.mail.EmailSender;
 import com.df.component.mq.JmsSender;
 import com.df.component.mq.RabbitSender;
 import com.df.domain.UserInfo;
@@ -23,6 +24,9 @@ public class TestController {
     @Resource
     private RabbitSender rabbitSender;
 
+    @Resource
+    private EmailSender emailSender;
+
     @RequestMapping("/sendJms/{msg}")
     public String sendJms(@PathVariable(name = "msg") String msg) {
         jmsSender.sendMessage(msg);
@@ -32,6 +36,12 @@ public class TestController {
     @RequestMapping("/sendRabbit/{msg}")
     public String sendRabbit(@PathVariable(name = "msg") String msg) {
         rabbitSender.sendMessage(msg);
+        return "ok";
+    }
+
+    @RequestMapping("/sendMail/{msg}")
+    public String sendMail(@PathVariable(name = "msg") String msg) {
+        emailSender.sendMessage(msg);
         return "ok";
     }
 

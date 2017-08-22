@@ -141,6 +141,22 @@ spring:
     username: xucd
     password: xucd
 
+  mail:
+    host: smtp.exmail.qq.com
+    port: 465
+    username: xuchengdong@qbao.com
+    password: '#k6V-YUu!'
+    properties:
+# 内置属性参考 com.sun.mail.smtp.SMTPTransport.SMTPTransport
+      mail:
+        debug: true
+        smtp:
+         connectiontimeout: 5000
+         timeout: 3000
+         writetimeout: 5000
+         ssl:
+          enable: true
+
 ---
 spring:
   profiles: production

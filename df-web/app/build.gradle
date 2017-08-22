@@ -74,6 +74,8 @@ dependencies {
 
     compile('org.springframework.boot:spring-boot-starter-amqp')
 
+    compile('org.springframework.boot:spring-boot-starter-mail')
+
     compile("org.springframework.boot:spring-boot-devtools")
 
 //    optional("org.springframework.boot:spring-boot-configuration-processor")
