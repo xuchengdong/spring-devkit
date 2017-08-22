@@ -145,7 +145,7 @@ spring:
     host: smtp.exmail.qq.com
     port: 465
     username: xuchengdong@qbao.com
-    password: '#k6V-YUu!'
+    password: '********'
     properties:
 # 内置属性参考 com.sun.mail.smtp.SMTPTransport.SMTPTransport
       mail:
