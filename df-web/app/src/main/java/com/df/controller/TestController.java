@@ -27,6 +27,11 @@ public class TestController {
     @Resource
     private EmailSender emailSender;
 
+    @RequestMapping("/hello")
+    public String hello() {
+        return "Hello World";
+    }
+
     @RequestMapping("/sendJms/{msg}")
     public String sendJms(@PathVariable(name = "msg") String msg) {
         jmsSender.sendMessage(msg);

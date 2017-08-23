@@ -23,6 +23,8 @@ security:
     casServerUrlPrefix: http://passport.qbao.com/cas
     loginUrl: http://passport.qbao.com/cas/qianbaoLogin
     authenticateAllArtifacts: false
+# test的路径不添加权限限制为了测试@WebMvcTest功能
+  ignored: /test/**
 
 #spring:
 #  datasource:
@@ -75,6 +77,11 @@ server:
 #      enabled: true
 
 name: Spring
+
+spring:
+  profiles:
+    active: development
+
 ---
 spring:
   profiles: development
