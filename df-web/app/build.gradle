@@ -27,6 +27,7 @@ configure(allprojects) {
 group 'com.df'
 version '1.0-SNAPSHOT'
 
+apply plugin: 'war'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
@@ -80,6 +81,9 @@ dependencies {
 
 //    optional("org.springframework.boot:spring-boot-configuration-processor")
 //    testCompile group: 'junit', name: 'junit', version: '4.12'
+
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+//    runtime("org.springframework.boot:spring-boot-starter-tomcat")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }
