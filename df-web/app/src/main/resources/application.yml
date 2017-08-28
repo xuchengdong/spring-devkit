@@ -14,8 +14,8 @@ logging:
 
 
 security:
-  headers:
-    frame: false
+#  headers:
+#    frame: false
 #  user:
 #    password: 123456
   cas:
@@ -76,17 +76,15 @@ server:
 #    admin:
 #      enabled: true
 
+#测试属性设置优先级：command-line-argument > System-Variable > environment-variable > Application property files
 name: Spring
 
 spring:
   profiles:
-    active: development
+      active: ubuntu
 
----
-spring:
-  profiles: development
   datasource:
-          multiple:
+      multiple:
             type: com.alibaba.druid.pool.DruidDataSource
             initialSize: 1
             minIdle: 1
@@ -105,9 +103,9 @@ spring:
             defaultDataSourcesName: df
             multipleDataSourcesNames: user01,user02,user03
             df:
-                url: jdbc:mysql://localhost:3306/df?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
-                username: root
-                password: 12345
+              url: jdbc:mysql://localhost:3306/df?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
+              username: root
+              password: 12345
             user01:
               url: jdbc:mysql://localhost:3306/df_user01?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
               username: root
@@ -120,41 +118,13 @@ spring:
               url: jdbc:mysql://localhost:3306/df_user03?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
               username: root
               password: 12345
-
-  redis:
-    pool:
-      max-wait: 1000
-    sentinel:
-      master: socialcp
-      nodes: 192.168.131.13:26379,192.168.131.13:26380,192.168.131.13:26381
-
-  cache:
-# 限定可用的缓存
-    cache-names: user,role
-# 某些场景下禁用缓存
-#    type: none
-
-  activemq:
-    broker-url: tcp://192.168.131.221:61616
-#    user: admin
-#    password: secret
-    pool:
-      enabled: true
-      max-connections: 50
-
-  rabbitmq:
-    host: 192.168.131.221
-    port: 5672
-    username: xucd
-    password: xucd
-
   mail:
     host: smtp.exmail.qq.com
     port: 465
     username: xuchengdong@qbao.com
     password: '********'
-    properties:
 # 内置属性参考 com.sun.mail.smtp.SMTPTransport.SMTPTransport
+    properties:
       mail:
         debug: true
         smtp:
@@ -163,12 +133,50 @@ spring:
          writetimeout: 5000
          ssl:
           enable: true
+  cache:
+# 限定可用的缓存
+    cache-names: user,role
+# 某些场景下禁用缓存
+#    type: none
+
 
 ---
+server:
+    port: 8080
 spring:
-  profiles: production
-  datasource:
-          druid:
-            url: jdbc:mysql://192.168.81.49:3306/df?useUnicode=true&characterEncoding=utf-8&autoReconnect=true&autoReconnectForPools=true&zeroDateTimeBehavior=convertToNull&useSSL=false
-            username: root
-            password: 12345
+  profiles: centos
+  redis:
+    pool:
+      max-wait: 1000
+    sentinel:
+      master: socialcp
+      nodes: 192.168.131.13:26379,192.168.131.13:26380,192.168.131.13:26381
+  activemq:
+    broker-url: tcp://192.168.131.221:61616
+#    user: admin
+#    password: secret
+    pool:
+      enabled: true
+      max-connections: 50
+  rabbitmq:
+    host: 192.168.131.221
+    port: 5672
+    username: xucd
+    password: xucd
+
+
+---
+server:
+    port: 8080
+spring:
+  profiles: ubuntu
+  activemq:
+    broker-url: tcp://localhost:61616
+    pool:
+      enabled: true
+      max-connections: 50
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: xucd
+    password: xucd
