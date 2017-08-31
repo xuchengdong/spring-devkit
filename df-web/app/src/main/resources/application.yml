@@ -79,6 +79,17 @@ server:
 #测试属性设置优先级：command-line-argument > System-Variable > environment-variable > Application property files
 name: Spring
 
+# https://docs.spring.io/spring-boot/docs/1.5.6.RELEASE/reference/htmlsingle/#production-ready-customizing-endpoints
+endpoints:
+  beans:
+#  修改beans默认endpoint id
+    id: springbeans
+#  不需要授权
+    sensitive: false
+  shutdown:
+#  通过post请求停止服务
+    enabled: true
+
 spring:
   profiles:
       active: ubuntu

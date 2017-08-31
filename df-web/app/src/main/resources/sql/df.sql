@@ -149,6 +149,7 @@ INSERT INTO df.t_user (user_id, user_name, password, mobile, email, create_time)
 INSERT INTO df.t_role (role_name) VALUES ('ROLE_USER');
 INSERT INTO df.t_role (role_name) VALUES ('ROLE_ADMIN');
 INSERT INTO df.t_role (role_name) VALUES ('ROLE_DBA');
+INSERT INTO df.t_role (role_name) VALUES ('ACTUATOR');
 
 INSERT INTO df_user01.t_user_info (user_id, mobile, email, nick_name, sex, age, avatar_url) VALUES (1000000000, '13065754987', null, null, 0, null, null);
 INSERT INTO df_user01.t_user_info (user_id, mobile, email, nick_name, sex, age, avatar_url) VALUES (1000000004, '18200007777', null, null, 0, null, null);
@@ -163,6 +164,7 @@ INSERT INTO df_user02.t_user_role (user_id, role_id) VALUES (1000000001, 2);
 INSERT INTO df_user02.t_user_role (user_id, role_id) VALUES (1000000004, 2);
 INSERT INTO df_user03.t_user_role (user_id, role_id) VALUES (1000000002, 3);
 INSERT INTO df_user03.t_user_role (user_id, role_id) VALUES (1000000005, 1);
+INSERT INTO df_user03.t_user_role (user_id, role_id) VALUES (1000000005, 4);
 
 -- dml
 -- SELECT * FROM df_user01.t_user_info WHERE id=?;
