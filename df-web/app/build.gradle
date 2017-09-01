@@ -1,6 +1,6 @@
 buildscript {
     ext {
-        springBootVersion = '1.5.4.RELEASE'
+        springBootVersion = '1.5.6.RELEASE'
     }
     repositories {
         // NOTE: You should declare only repositories that you need here
@@ -37,6 +37,14 @@ apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+
+springBoot {
+    buildInfo {
+        additionalProperties = [
+                'foo': 'bar'
+        ]
+    }
+}
 
 sourceCompatibility = 1.8
 
