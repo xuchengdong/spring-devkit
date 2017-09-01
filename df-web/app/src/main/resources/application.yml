@@ -102,6 +102,15 @@ info:
 #      target: @java.version@
 
 management:
+#  security:
+##  修改默认 Accessing sensitive endpoints 所需要的角色 默认ACTUATOR
+#    roles: ACTUATOR
+##  关闭 sensitive endpoints 角色校验
+#    enabled: false
+## Customizing the management endpoint paths 默认actuator
+#  context-path: /manage
+##  Customizing the management server port
+#  port: 8081
   info:
     git:
       mode: full
