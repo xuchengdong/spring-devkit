@@ -17,6 +17,11 @@ buildscript {
     }
 }
 
+// https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
+plugins {
+    id "com.gorylenko.gradle-git-properties" version "1.4.17"
+}
+
 configure(allprojects) {
     apply plugin: 'propdeps'
     apply plugin: 'propdeps-maven'
@@ -82,8 +87,8 @@ dependencies {
 //    optional("org.springframework.boot:spring-boot-configuration-processor")
 //    testCompile group: 'junit', name: 'junit', version: '4.12'
 
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
-//    runtime("org.springframework.boot:spring-boot-starter-tomcat")
+//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    runtime("org.springframework.boot:spring-boot-starter-tomcat")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
 
@@ -92,7 +97,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-actuator-docs")
     compile("org.jolokia:jolokia-core")
 //    compile("org.webjars:hal-browser")
-    compile("spring-data-rest-hal-browser")
+    compile("org.springframework.data:spring-data-rest-hal-browser")
 }
 
 //compileJava.dependsOn(processResources)

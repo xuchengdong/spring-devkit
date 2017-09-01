@@ -89,6 +89,22 @@ endpoints:
   shutdown:
 #  通过post请求停止服务
     enabled: true
+info:
+  app:
+    encoding: UTF-8
+    java:
+      source: 1.8
+      target: 1.8
+#  using Maven
+#    encoding: @project.build.sourceEncoding@
+#    java:
+#      source: @java.version@
+#      target: @java.version@
+
+management:
+  info:
+    git:
+      mode: full
 
 spring:
   profiles:
