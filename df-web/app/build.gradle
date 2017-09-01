@@ -19,7 +19,7 @@ buildscript {
 
 // https://plugins.gradle.org/plugin/com.gorylenko.gradle-git-properties
 plugins {
-    id "com.gorylenko.gradle-git-properties" version "1.4.17"
+//    id "com.gorylenko.gradle-git-properties" version "1.4.17"
 }
 
 configure(allprojects) {
