@@ -53,7 +53,12 @@ mybatis:
         default-statement-timeout: 30
 
 server:
-    port: 80
+    port: 8443
+    ssl:
+      enabled: true
+      key-store: classpath:main.jks
+      key-password: secret
+
 
 #指定触发器文件没看到效果
 #spring:
@@ -110,7 +115,12 @@ management:
 ## Customizing the management endpoint paths 默认actuator
 #  context-path: /manage
 ##  Customizing the management server port
-#  port: 8081
+  port: 8080
+  ssl:
+    enabled: true
+    key-store: classpath:management.jks
+    key-password: secret
+
   info:
     git:
       mode: full
