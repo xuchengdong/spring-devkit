@@ -94,6 +94,9 @@ endpoints:
   shutdown:
 #  通过post请求停止服务
     enabled: true
+  health:
+    sensitive: true
+
 info:
   app:
     encoding: UTF-8
@@ -107,19 +110,19 @@ info:
 #      target: @java.version@
 
 management:
-#  security:
+  security:
 ##  修改默认 Accessing sensitive endpoints 所需要的角色 默认ACTUATOR
 #    roles: ACTUATOR
 ##  关闭 sensitive endpoints 角色校验
-#    enabled: false
+    enabled: true
 ## Customizing the management endpoint paths 默认actuator
 #  context-path: /manage
 ##  Customizing the management server port
-  port: 8080
-  ssl:
-    enabled: true
-    key-store: classpath:management.jks
-    key-password: secret
+#  port: 8080
+#  ssl:
+#    enabled: true
+#    key-store: classpath:management.jks
+#    key-password: secret
 
   info:
     git:
