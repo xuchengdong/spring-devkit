@@ -96,6 +96,9 @@ endpoints:
     enabled: true
   health:
     sensitive: true
+# Disabling Jolokia
+#  jolokia:
+#    enabled: false
 
 info:
   app:
@@ -127,6 +130,11 @@ management:
   info:
     git:
       mode: full
+
+# Customizing Jolokia
+jolokia:
+  config:
+    debug: true
 
 spring:
   profiles:
