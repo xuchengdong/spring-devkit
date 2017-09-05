@@ -32,13 +32,15 @@ configure(allprojects) {
 group 'com.df'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'war'
+//apply plugin: 'war'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
 
 springBoot {
+//  fully executable jar CentOS and Ubuntu 环境可直接执行 ./app-1.0-SNAPSHOT.jar
+    executable = true
     buildInfo {
         additionalProperties = [
                 'foo': 'bar'
