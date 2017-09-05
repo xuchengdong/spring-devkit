@@ -38,6 +38,15 @@ mybatis:
 server:
     port: 9080
 
+#management:
+## Remote shell credentials 未测试成功
+#  shell:
+#    auth:
+#      simple:
+#        user:
+#          name: xucd
+#          password: xucd
+
 #指定触发器文件没看到效果
 #spring:
 #  devtools:
