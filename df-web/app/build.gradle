@@ -32,11 +32,12 @@ configure(allprojects) {
 group 'com.df'
 version '1.0-SNAPSHOT'
 
-apply plugin: 'war'
+//apply plugin: 'war'
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 apply plugin: 'org.springframework.boot'
+apply plugin: 'maven'
 
 springBoot {
 //  fully executable jar CentOS and Ubuntu 环境可直接执行 ./app-1.0-SNAPSHOT.jar
@@ -98,7 +99,7 @@ dependencies {
 //    testCompile group: 'junit', name: 'junit', version: '4.12'
 
 //  Packaging executable jar and war files java -jar app\build\libs\app-1.0-SNAPSHOT.war
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+//    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 //    runtime("org.springframework.boot:spring-boot-starter-tomcat")
 
     testCompile('org.springframework.boot:spring-boot-starter-test')
@@ -112,3 +113,45 @@ dependencies {
 }
 
 //compileJava.dependsOn(processResources)
+
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://nexus.qbao.com/repository/maven-snapshots/"){
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.packaging = 'jar'
+            pom {
+                project {
+/*                    dependencyManagement {
+                        dependencies {
+                            dependency {
+                                groupId "org.springframework.boot"
+                                artifactId "spring-boot-dependencies"
+                                version "1.5.6.RELEASE"
+                                type "pom"
+                                scope "import"
+                            }
+                        }
+                    }*/
+                    distributionManagement{
+                        snapshotRepository{
+                            id 'snapshots'
+                            url 'http://nexus.qbao.com/repository/maven-snapshots/'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
