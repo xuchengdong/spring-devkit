@@ -2,4 +2,5 @@ rootProject.name = 'df-web'
 include 'api'
 include 'app'
 include 'ba'
+include 'service'
 
