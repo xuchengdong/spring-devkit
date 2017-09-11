@@ -1,6 +1,8 @@
-version 'unspecified'
+group 'com.df'
+version '1.0.0'
 
 apply plugin: 'java'
+apply plugin: 'maven'
 
 sourceCompatibility = 1.8
 
@@ -10,4 +12,16 @@ repositories {
 
 dependencies {
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "http://nexus.qbao.com/repository/maven-releases/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+//            pom.packaging = 'jar'
+        }
+    }
 }
