@@ -44,7 +44,7 @@ CREATE TABLE df.`t_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键自增id',
   `user_id` int(11) NOT NULL COMMENT '用户唯一标识id',
   `user_name` varchar(30) NOT NULL COMMENT '用户名',
-  `password` char(32) DEFAULT NULL COMMENT '密码',
+  `password` VARCHAR(60) DEFAULT NULL COMMENT '密码',
   `mobile` varchar(11) DEFAULT NULL COMMENT '手机号',
   `email` varchar(20) DEFAULT NULL COMMENT '邮箱',
   `create_time` datetime NOT NULL COMMENT '创建时间',
@@ -142,7 +142,7 @@ CREATE TABLE df_user03.`t_user_role` (
 INSERT INTO df.t_user (user_id, user_name, password, create_time) VALUES (1000000000, '小米', null, '2017-07-15 00:00:00');
 INSERT INTO df.t_user (user_id, user_name, password, create_time) VALUES (1000000001, '红米', null, '2017-07-15 00:00:00');
 INSERT INTO df.t_user (user_id, user_name, password, create_time) VALUES (1000000002, '红米note', null, '2017-07-15 00:00:00');
-INSERT INTO df.t_user (user_id, user_name, password, create_time) VALUES (1000000003, '13000000000', null, '2017-08-15 11:03:00');
+INSERT INTO df.t_user (user_id, user_name, password, create_time) VALUES (1000000003, '13000000000', '$2a$10$yWa5zoicviPwaC8TZCkE.ecUu0X8FqtoWdfHeL.aXWvD.FEY93WPq', '2017-08-15 11:03:00');
 INSERT INTO df.t_user (user_id, user_name, password, create_time) VALUES (1000000004, 'u_5832347', null, '2017-08-15 14:02:39');
 INSERT INTO df.t_user (user_id, user_name, password, mobile, email, create_time) VALUES (1000000005, '13057555156', null, null, null, '2017-08-15 17:58:49');
 
