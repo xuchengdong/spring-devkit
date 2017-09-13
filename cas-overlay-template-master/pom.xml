@@ -72,38 +72,30 @@
             <artifactId>cas-server-support-jdbc</artifactId>
             <version>${cas.version}</version>
         </dependency>
+        <!--JDBC Drivers-->
         <dependency>
             <groupId>org.apereo.cas</groupId>
             <artifactId>cas-server-support-jdbc-drivers</artifactId>
             <version>${cas.version}</version>
         </dependency>
-        <!--JDBC Drivers-->
-<!--        <dependency>
+
+        <!--
+        <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.41</version>
-        </dependency>-->
+        </dependency>
+        -->
+
+        <!--REST Authentication-->
+        <!--
+        <dependency>
+            <groupId>org.apereo.cas</groupId>
+            <artifactId>cas-server-support-rest-authentication</artifactId>
+            <version>${cas.version}</version>
+        </dependency>
+        -->
     </dependencies>
-
-<!--    <dependencyManagement>
-        <dependencies>
-
-            &lt;!&ndash; Override a dependency by including it BEFORE the BOM &ndash;&gt;
-            <dependency>
-                <groupId>org.group</groupId>
-                <artifactId>artifact-name</artifactId>
-                <version>X.Y.Z</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apereo.cas</groupId>
-                <artifactId>cas-server-support-bom</artifactId>
-                <version>${cas.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>-->
 
     <properties>
         <cas.version>5.1.3</cas.version>
