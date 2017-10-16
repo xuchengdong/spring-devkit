@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 public class CommandLineRunnerCase implements CommandLineRunner {
     private static Logger logger = LoggerFactory.getLogger(CommandLineRunnerCase.class);
 
+    @Override
     public void run(String... args) {
         // Do something...
         for (String arg: args){

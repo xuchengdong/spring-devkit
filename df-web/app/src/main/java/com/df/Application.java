@@ -6,6 +6,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.support.SpringBootServletInitializer;
 import org.springframework.cache.annotation.EnableCaching;
 
+@SuppressWarnings("ALL")
 @SpringBootApplication
 @EnableCaching
 public class Application extends SpringBootServletInitializer {

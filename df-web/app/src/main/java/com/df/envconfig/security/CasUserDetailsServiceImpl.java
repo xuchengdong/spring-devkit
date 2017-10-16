@@ -20,7 +20,7 @@ import java.util.List;
  * @author xuchengdong@qbao.com on 2017/8/7.
  */
 @Component
-public class CasUserDetailsService implements UserDetailsService {
+public class CasUserDetailsServiceImpl implements UserDetailsService {
 
     @Resource
     private UserService userService;

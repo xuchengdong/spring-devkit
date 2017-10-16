@@ -14,9 +14,9 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RabbitSender {
 
-    private final static String queueName = "spring-boot";
-    private final static String exchangeName = "spring-boot-exchange";
-    private final static String routingKey = queueName;
+    private final static String QUEUE_NAME = "spring-boot";
+    private final static String EXCHANGE_NAME = "spring-boot-exchange";
+    private final static String ROUTING_KEY = QUEUE_NAME;
 
     private RabbitTemplate rabbitTemplate;
 
@@ -26,21 +26,21 @@ public class RabbitSender {
 
     @Bean
     Queue queue() {
-        return new Queue(queueName, false);
+        return new Queue(QUEUE_NAME, false);
     }
 
     @Bean
     TopicExchange exchange() {
-        return new TopicExchange(exchangeName);
+        return new TopicExchange(EXCHANGE_NAME);
     }
 
     @Bean
     Binding binding(Queue queue, TopicExchange exchange) {
-        return BindingBuilder.bind(queue).to(exchange).with(routingKey);
+        return BindingBuilder.bind(queue).to(exchange).with(ROUTING_KEY);
     }
 
     public void sendMessage(String msg) {
-        rabbitTemplate.convertAndSend(routingKey, msg);
+        rabbitTemplate.convertAndSend(ROUTING_KEY, msg);
     }
 
 }

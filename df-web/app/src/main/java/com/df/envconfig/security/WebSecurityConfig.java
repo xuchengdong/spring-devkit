@@ -17,6 +17,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.session.SessionRegistryImpl;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.security.web.authentication.session.ConcurrentSessionControlAuthenticationStrategy;
 
@@ -128,7 +129,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @ConditionalOnMissingBean
     public CasAuthenticationProvider casAuthenticationProvider(ServiceProperties serviceProperties,
                                                                Cas20ServiceTicketValidator ticketValidator,
-                                                               CasUserDetailsService userDetailsService) {
+                                                               UserDetailsService userDetailsService) {
         CasAuthenticationProvider casAuthenticationProvider = new CasAuthenticationProvider();
         casAuthenticationProvider.setServiceProperties(serviceProperties);
         casAuthenticationProvider.setTicketValidator(ticketValidator);
