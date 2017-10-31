@@ -79,6 +79,7 @@ dependencies {
     compile('org.springframework.boot:spring-boot-starter-aop')
     compile('org.springframework.boot:spring-boot-starter-cache')
     compile('org.springframework.boot:spring-boot-starter-data-redis')
+    compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 //    compile('redis.clients:jedis')
 //    compile ('org.springframework.data:spring-data-redis')
     compile('org.springframework.boot:spring-boot-starter-security')
