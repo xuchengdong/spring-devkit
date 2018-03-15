@@ -6,14 +6,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Order(-1)// 保证该AOP在@Transactional之前执行
 @Component
-@ConditionalOnMissingBean(com.df.multipleds.spring.boot.autoconfigure.MultipleDataSourceAspect.class)
 public class MultipleDataSourceAspect {
 
     private static final Logger logger = LoggerFactory.getLogger(MultipleDataSourceAspect.class);
